@@ -1,0 +1,16 @@
+[project]
+name = "achilles-examples"
+version = "0.1.0"
+description = "Examples for the Achilles Optimizer"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "achilles-optimizer==0.2.0",
+    "astropy>=7.0.1",
+    # The main package will be installed in development mode using:
+    # uv pip install -e ..
+]
+
+[tool.uv]
+# Configure uv settings
+dev-dependencies = []

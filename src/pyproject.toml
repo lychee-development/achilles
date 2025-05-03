@@ -1,0 +1,26 @@
+[project]
+name = "achilles-optimizer"
+version = "0.2.0"
+description = "Claude-Powered Python Performance Optimizer"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=0.50.0",
+    "build>=1.2.2.post1",
+    "dotenv>=0.9.9",
+    "pybind11>=2.13.6",
+    "rich>=14.0.0",
+    "setuptools>=79.0.1",
+    "twine>=6.1.0",
+]
+
+[project.scripts]
+achilles = "achilles.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "." }
+packages = ["achilles", "achilles.agents", "achilles.file_ops"]
