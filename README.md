@@ -10,6 +10,7 @@
 
 # Achilles: LLM-powered Python performance optimizer
 
+Achilles is a tool that automatically speeds up your Python programs by rewriting the bottlenecks in C++ with the help of LLMs. 
 
 ## How to use Achilles
 
@@ -37,6 +38,8 @@ To run a python executable using achillles, just type the following command:
 uv run achilles run your_python_file.py --your_python_args
 ```
 
+We have some example projects you can run in the repository, in the examples folder.
+
 ## Additional Information
 
 ### Requirements
@@ -57,9 +60,22 @@ You can set up your Anthropic API key in one of two ways:
 ### How It Works
 
 Achilles uses Claude to analyze your Python code and optimize its performance by:
-- Identifying bottlenecks through profiling
-- Implementing optimizations automatically in C++
-- Importing these optimizations at runtime
+1. Profiling your Python code with cProfile to identify slow functions.
+2. Then it generates multiple optimized C++ versions of those functions using multiple different strategies. 
+3. Benchmarks the different strategies against one another and validates the strategy output against the original code. 
+4. And finally compiles and patches them in at runtime
+
+We have some agents which use different strategies for speeding up your code
+| Strategy       | Description                                            | Use Case                                    |
+| -------------- | ------------------------------------------------------ | ------------------------------------------- |
+| **standard**       | Safe, general-purpose C++ translation                  | Generic code                                |
+| **algorithmic**    | Attempts to rewrite with better algorithmic efficiency | More algorithmic tasks                      |
+| **vectorize**      | SIMD vectorization                                     | Loops, machine learning, linear algebra     |
+| **neon-simd**      | Uses NEON intrinsics for Apple Silicon devices         | Loops, machine learning, linear algebra     |
+| **memory**         | Reduces allocations and copies                         | Memory-intensive workloads                  |
+| **parallel**       | Adds multithreading                                    | Parallelizable code on the CPU              |
+| **metal-gpu**      | Moves hot loops to Metal GPU on macOS                  | Parallelizable code on the GPU              |
+| **cache-blocking** | Applies loop tiling for cache reuse                    | Image/matrix processing                     |
 
 ### Command Reference
 
