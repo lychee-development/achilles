@@ -12,6 +12,15 @@
 
 Achilles is a tool that automatically speeds up your Python programs by rewriting the bottlenecks in C++ with the help of LLMs. 
 
+### How It Works
+
+Achilles uses Claude to analyze your Python code and optimize its performance by:
+1. **Profiling** your Python code with cProfile to identify slow functions 🐢
+2. Then it **generates multiple optimized C++ versions** of those functions using multiple different strategies 🚀
+3. **Benchmarks** the different strategies against one another and **validates** the strategy output against the original code 🗒️
+4. And finally **compiles and patches** them in at runtime 🧵
+
+
 ## How to use Achilles
 
 Install Achilles using the following command:
@@ -56,14 +65,6 @@ You can set up your Anthropic API key in one of two ways:
    ```
    ANTHROPIC_API_KEY=your_api_key_here
    ```
-
-### How It Works
-
-Achilles uses Claude to analyze your Python code and optimize its performance by:
-1. Profiling your Python code with cProfile to identify slow functions.
-2. Then it generates multiple optimized C++ versions of those functions using multiple different strategies. 
-3. Benchmarks the different strategies against one another and validates the strategy output against the original code. 
-4. And finally compiles and patches them in at runtime
 
 We have some agents which use different strategies for speeding up your code
 | Strategy       | Description                                            | Use Case                                    |
